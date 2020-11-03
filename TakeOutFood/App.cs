@@ -116,8 +116,8 @@
         public ItemRepository()
         {
             foodList.Add(new Item("ITEM0001", "Braised chicken", 18.00));
-            foodList.Add(new Item("ITEM0002", "Chinese hamburger", 6.00));
-            foodList.Add(new Item("ITEM0003", "Cold noodles", 8.00));
+            foodList.Add(new Item("ITEM0013", "Chinese hamburger", 6.00));
+            foodList.Add(new Item("ITEM0022", "Cold noodles", 8.00));
         }
         public List<Item> FindAll()
         {
@@ -127,11 +127,7 @@
 
     public class SalesPromotionRepository : ISalesPromotionRepository
     {
-        private List<SalesPromotion> promotionList;
-        public SalesPromotionRepository()
-        {
-            promotionList.Add(new SalesPromotion("Half price", "DisplayName", new List<string>() { "ITEM0001", "ITEM0003" }));
-        }
+        private List<SalesPromotion> promotionList = new List<SalesPromotion>() { new SalesPromotion("Half price", "DisplayName", new List<string>() { "ITEM0001", "ITEM0022" }) };
 
         public List<SalesPromotion> FindAll()
         {
