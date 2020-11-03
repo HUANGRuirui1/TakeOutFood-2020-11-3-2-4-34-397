@@ -17,12 +17,11 @@
         public string BestCharge(List<string> inputs)
         {
             //TODO: write code here
-            string[] input = new string[] { "ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1" };
             List<Item> foodList = itemRepository.FindAll();
             List<SalesPromotion> promotionList = salesPromotionRepository.FindAll();
             List<string> usePromotionList = new List<string>();
             bool haveSalesPromotion = false;
-            List<FoodOrder> foodOrders = GenerateFoodOrder(foodList, input, promotionList, usePromotionList, ref haveSalesPromotion);
+            List<FoodOrder> foodOrders = GenerateFoodOrder(foodList, inputs, promotionList, usePromotionList, ref haveSalesPromotion);
             double originalTotalPrice = 0;
             double totalPrice = 0;
             string output = "============= Order details =============\n";
@@ -50,15 +49,15 @@
             return output;
         }
 
-        private List<FoodOrder> GenerateFoodOrder(List<Item> foodList, string[] input, List<SalesPromotion> promotionList, List<string> usePromotionList, ref bool haveSalesPromotion)
+        private List<FoodOrder> GenerateFoodOrder(List<Item> foodList, List<string> input, List<SalesPromotion> promotionList, List<string> usePromotionList, ref bool haveSalesPromotion)
         {
             List<FoodOrder> foodOrders = new List<FoodOrder>();
-            for (int i = 0; i < input.Length; i++)
+            foreach(string singleString in input)
             {
                 FoodOrder thisFoodOrder = new FoodOrder();
-                string foodId = input[i].Substring(0, 8);
+                string foodId = singleString.Substring(0, 8);
                 thisFoodOrder.Id = foodId;
-                int count = Convert.ToInt32(input[i].Remove(0, 11));
+                int count = Convert.ToInt32(singleString.Remove(0, 11));
                 thisFoodOrder.Count = count;
                 foreach (Item foodItem in foodList)
                 {
